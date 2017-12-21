@@ -71,7 +71,7 @@ def main_route():
   return render_template("main.html",owned=owned_dict,coin_rows=coin_row)
 
 
-@main_route('/nick'):
+@main.route('/nick'):
 def nick_route():
   coin_row = []
   for coin in nick_owned_dict:
