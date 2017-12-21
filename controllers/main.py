@@ -13,12 +13,13 @@ owned = [
   "eth", 0.24861740,
   "ltc", 0.56849907,
   "req", 197.802,
-  "wabi", 14.985,
+  #"wabi", 14.985,
+  "xrp", 41.958,
   #"neo", .00955,
   #"icx", 5,
   #"vet", 18.966,
   #"qtum", 0.00872,
-  "eng", 23.976,
+  #"eng", 23.976,
   "trx", 999.999,
   "ost", 164.835
 ]
@@ -28,12 +29,13 @@ owned_dict = {
   "eth": 0.24861740,
   "ltc": 0.56849907,
   "req": 197.802,
-  "wabi": 14.985,
+  #"wabi": 14.985,
+  "xrp": 41.958,
   #"neo": .00955,
   #"icx": 5,
   #"vet": 18.966,
   #"qtum": 0.00872,
-  "eng": 23.976,
+  #"eng": 23.976,
   "trx": 999.999,
   "ost": 164.835
 }
@@ -43,12 +45,13 @@ full_names = {
   "eth": "ethereum",
   "ltc": "litecoin",
   "req": "request-network",
-  "wabi": "wabi",
+  #"wabi": "wabi",
+  "xrp": "ripple",
   #"neo": "neo",
   #"icx": "icon",
   #"vet": "vechain",
   #"qtum": "qtum",
-  "eng": "enigma-project",
+  #"eng": "enigma-project",
   "trx": "tron",
   "ost": "simple-token"
 }
