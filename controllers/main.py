@@ -14,12 +14,13 @@ owned = [
   "ltc", 0.56849907,
   "req", 197.802,
   "wabi", 14.985,
-  "neo", .45,
+  "neo", .00955,
   #"icx", 5,
   "vet", 18.966,
   "qtum", 0.00872,
   "eng", 23.976,
-  "trx", 742.257
+  "trx", 742.257,
+  "ost": 123.876
 ]
 
 owned_dict = {
@@ -28,12 +29,13 @@ owned_dict = {
   "ltc": 0.56849907,
   "req": 197.802,
   "wabi": 14.985,
-  "neo": .45,
+  "neo": .00955,
   #"icx": 5,
   "vet": 18.966,
   "qtum": 0.00872,
   "eng": 23.976,
-  "trx": 742.257
+  "trx": 742.257,
+  "ost": 123.876
 }
 
 full_names = {
@@ -47,7 +49,8 @@ full_names = {
   "vet": "vechain",
   "qtum": "qtum",
   "eng": "enigma-project",
-  "trx": "tron"
+  "trx": "tron",
+  "ost": "simple-token"
 }
 
 

@@ -10,7 +10,8 @@ coins = [
   "vet",
   "qtum",
   "eng",
-  "trx"
+  "trx",
+  "ost"
 ]
 
 owned = {
@@ -19,12 +20,13 @@ owned = {
   "ltc": 0.56849907,
   "req": 197.802,
   "wabi": 14.985,
-  "neo": .45,
+  "neo": .00955,
   //"icx": 5,
   "vet": 18.966,
   "qtum": 0.00872,
   "eng": 23.976,
-  "trx": 742.257
+  "trx": 742.257,
+  "ost": 123.876
 }
 
 bought = {
@@ -38,7 +40,8 @@ bought = {
   "vet": 1.46,
   "qtum": 63,
   "eng": 1.19,
-  "trx": 0.048807
+  "trx": 0.048807,
+  "ost": .321272
 }
 
 function timeout() {
