@@ -44,10 +44,4 @@ th {
 .price{
 }
 #my_profit {
-  position: absolute;
-  width: 100%;
-  text-align: center;
-  font-size: 30px;
-  color: green;
-  bottom: 10%;
 }

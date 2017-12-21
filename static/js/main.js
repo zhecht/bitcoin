@@ -43,7 +43,7 @@ bought = {
 
 function timeout() {
   $.get("/price", function(data) {
-    var overall_profit = 0;
+    var overall_profit = 0, overall = 0, overall_bought = 0;
 
     for (var i = 0; i < coins.length; ++i) {
       var price = data[coins[i]]["price"];
@@ -54,6 +54,9 @@ function timeout() {
       var total_profit = (curr_total - bought_total).toFixed(2);
       
       overall_profit += parseFloat(total_profit);
+      overall_bought += parseFloat(bought_total);
+      overall += parseFloat(curr_total);
+
       $("#"+coins[i]+" .price").text("$"+price);
       $("#"+coins[i]+" .24h").text(day_trend);
       $("#"+coins[i]+" .1h").text(hour_trend);
@@ -79,6 +82,8 @@ function timeout() {
       }
     }
 
+    $("#my_total").text("$"+overall.toFixed(2));
+    $("#my_bought").text("$"+overall_bought.toFixed(2));
     $("#my_profit").text("$"+overall_profit.toFixed(2));
     if (overall_profit < 0) {
       $("#my_profit").css("color", "red");
