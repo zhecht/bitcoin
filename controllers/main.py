@@ -9,7 +9,7 @@ except:
 main = Blueprint('main', __name__, template_folder='views')
 
 owned = [
-  "btc", 0.03270468,
+  "btc", 0.01845468,
   "eth", 0.24861740,
   "ltc", 0.56849907,
   "req", 197.802,
@@ -25,7 +25,7 @@ owned = [
 ]
 
 owned_dict = {
-  "btc": 0.03270468,
+  "btc": 0.01845468,
   "eth": 0.24861740,
   "ltc": 0.56849907,
   "req": 197.802,
