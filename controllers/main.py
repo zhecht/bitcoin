@@ -102,7 +102,7 @@ def price_route():
   return jsonify(arr)
 
 @main.route('/nickprice')
-def price_route():
+def nick_price_route():
   arr = {}
   url = "https://coinmarketcap.com/all/views/all/"
   soup = BS(urllib.urlopen(url).read(), "lxml")
