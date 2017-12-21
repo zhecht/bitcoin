@@ -107,6 +107,7 @@ def nick_price_route():
   url = "https://coinmarketcap.com/all/views/all/"
   soup = BS(urllib.urlopen(url).read(), "lxml")
 
+
   for coin in nick_owned_dict:
     full_id = "id-"+full_names[coin]
     row = soup.find("tr", {"id": full_id})
@@ -119,6 +120,5 @@ def nick_price_route():
       "24h": inc_dec,
       "1h": inc_dec_1h,
     }
-
   #print(arr)
   return jsonify(arr)
