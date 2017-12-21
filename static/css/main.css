@@ -1,0 +1,53 @@
+* {
+  margin: 0; padding: 0;
+}
+
+#table_div {
+  width: 100%; 
+  background: #f1f1f1;
+}
+table {
+  position: absolute;
+  width: 90%;
+  margin-left: 5%;
+  top:5%;
+  text-align: right;
+  border-collapse: collapse;
+}
+
+tr {
+  border-bottom: 1px solid;
+}
+
+td,th {
+  padding: 5px;
+  font-size: 20px;
+}
+th {
+  font-size: 25px;
+}
+
+.col {
+  float: left;
+  width: 100%;
+}
+
+.title{
+  font-size: 30px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.price, .owned, .profit {
+}
+
+.price{
+}
+#my_profit {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  font-size: 30px;
+  color: green;
+  bottom: 10%;
+}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<table>
+  <tr>
+    <th></th>
+    <th>Price</th>
+    <th>1h trend</th>
+    <th>24h trend</th>
+    <th>Amt Owned</th>
+    <th>USD</th>
+    <th>Bought @</th>
+    <th>Profit</th>
+  </tr>
+  {% for row in coin_rows %}
+  <tr id="{{row.id}}">
+    <td class="title">{{row.id}}</td>
+    <td class="price">$0</td>
+    <td class="1h">0%</td>
+    <td class="24h">0%</td>
+    <td class="owned">{{row.amt}}</td>
+    <td class="profit">$0</td>
+    <td class="bought">$0</td>
+    <td class="total_profit">$0</td>
+  </tr>
+  
+
+  {% endfor %}
+  
+</table>
+
+<div id="my_profit">
+  0$
+</div>
+{% endblock %}
+
