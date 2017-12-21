@@ -16,11 +16,11 @@ owned = [
   "wabi", 14.985,
   #"neo", .00955,
   #"icx", 5,
-  "vet", 18.966,
+  #"vet", 18.966,
   #"qtum", 0.00872,
   "eng", 23.976,
-  "trx", 742.257,
-  "ost", 123.876
+  "trx", 999.999,
+  "ost", 164.835
 ]
 
 owned_dict = {
@@ -31,11 +31,11 @@ owned_dict = {
   "wabi": 14.985,
   #"neo": .00955,
   #"icx": 5,
-  "vet": 18.966,
+  #"vet": 18.966,
   #"qtum": 0.00872,
   "eng": 23.976,
-  "trx": 742.257,
-  "ost": 123.876
+  "trx": 999.999,
+  "ost": 164.835
 }
 
 full_names = {
@@ -46,7 +46,7 @@ full_names = {
   "wabi": "wabi",
   #"neo": "neo",
   #"icx": "icon",
-  "vet": "vechain",
+  #"vet": "vechain",
   #"qtum": "qtum",
   "eng": "enigma-project",
   "trx": "tron",
