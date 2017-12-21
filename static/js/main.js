@@ -13,7 +13,7 @@ coins = [
   //"eng",
   "trx",
   "ost"
-]
+];
 
 owned = {
   "btc": 0.03270468,
@@ -29,7 +29,7 @@ owned = {
   //"eng": 23.976,
   "trx": 999.999,
   "ost": 164.835
-}
+};
 
 bought = {
   "btc": 18345.99,
@@ -45,10 +45,29 @@ bought = {
   //"eng": 1.19,
   "trx": 0.048807,
   "ost": .321272
+};
+
+
+nick_coins = [
+  "trx", "xrp"
+];
+
+nick_owned = {
+  "trx": 397.602,
+  "xrp": 23.976
+};
+
+nick_bought = {
+  "trx": .04,
+  "xrp": .96
 }
 
 function timeout() {
-  $.get("/price", function(data) {
+  var url = "/price";
+  if (window.location.pathname == "/nick") {
+    url = "/nickprice";
+  }
+  $.get(url, function(data) {
     var overall_profit = 0, overall = 0, overall_bought = 0;
 
     for (var i = 0; i < coins.length; ++i) {

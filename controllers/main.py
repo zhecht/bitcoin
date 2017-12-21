@@ -40,6 +40,11 @@ owned_dict = {
   "ost": 164.835
 }
 
+nick_owned_dict = {
+  "trx": 397.602,
+  "xrp": 23.976
+}
+
 full_names = {
   "btc": "bitcoin",
   "eth": "ethereum",
@@ -65,6 +70,15 @@ def main_route():
     coin_row.append({"id": coin, "amt": owned_dict[coin]})
   return render_template("main.html",owned=owned_dict,coin_rows=coin_row)
 
+
+@main_route('/nick'):
+def nick_route():
+  coin_row = []
+  for coin in nick_owned_dict:
+    #print(i, owned[i])
+    coin_row.append({"id": coin, "amt": nick_owned_dict[coin]})
+  return render_template("main.html",owned=nick_owned_dict,coin_rows=coin_row)
+
 @main.route('/price')
 def price_route():
   arr = {}
@@ -72,6 +86,28 @@ def price_route():
   soup = BS(urllib.urlopen(url).read(), "lxml")
 
   for coin in owned_dict:
+    full_id = "id-"+full_names[coin]
+    row = soup.find("tr", {"id": full_id})
+    #row = coin.find_all("tr", id=full_id)
+    val = row.find("a", class_="price")
+    inc_dec = row.find("td", class_="percent-24h").text
+    inc_dec_1h = row.find("td", class_="percent-1h").text
+    arr[coin] = {
+      "price": float(val.text[1:]),
+      "24h": inc_dec,
+      "1h": inc_dec_1h,
+    }
+
+  #print(arr)
+  return jsonify(arr)
+
+@main.route('/nickprice')
+def price_route():
+  arr = {}
+  url = "https://coinmarketcap.com/all/views/all/"
+  soup = BS(urllib.urlopen(url).read(), "lxml")
+
+  for coin in nick_owned_dict:
     full_id = "id-"+full_names[coin]
     row = soup.find("tr", {"id": full_id})
     #row = coin.find_all("tr", id=full_id)
