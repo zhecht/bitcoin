@@ -34,7 +34,7 @@ full_names = {
 }
 
 pre_url = "/home/zhecht/bitcoin/"
-pre_url = ""
+#pre_url = ""
 
 def get_owned(who):
   first_letter = who[0].upper()
