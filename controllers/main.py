@@ -65,7 +65,7 @@ full_names = {
 def get_owned(who):
   first_letter = who[0].upper()
   coin_rows = []
-  with open("coins.txt") as f:
+  with open("/home/zhecht/bitcoin/coins.txt") as f:
     content = f.readlines()
   content = [x.strip() for x in content]
 
@@ -84,7 +84,7 @@ def get_rows(who):
   #who is zack,jimmy,nick
   first_letter = who[0].upper()
   coin_rows = []
-  with open("coins.txt") as f:
+  with open("/home/zhecht/bitcoin/coins.txt") as f:
     content = f.readlines()
   content = [x.strip() for x in content]
 
