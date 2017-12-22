@@ -54,6 +54,7 @@ full_names = {
   "xrp": "ripple",
   #"neo": "neo",
   #"icx": "icon",
+  "iota": "iota",
   "vet": "vechain",
   #"qtum": "qtum",
   #"eng": "enigma-project",
@@ -61,34 +62,66 @@ full_names = {
   "ost": "simple-token"
 }
 
+def get_owned(who):
+  first_letter = who[0].upper()
+  coin_rows = []
+  with open("coins.txt") as f:
+    content = f.readlines()
+  content = [x.strip() for x in content]
 
-@main.route('/')
-def main_route():
-  coin_row = []
-  for coin in owned_dict:
-    #print(i, owned[i])
-    coin_row.append({"id": coin, "amt": owned_dict[coin]})
-  return render_template("main.html",owned=owned_dict,coin_rows=coin_row)
+  for i in range(0,len(content)):
+    split_line = content[i].split(" ")
+    if split_line[0] == first_letter:
+      total_coins = int(split_line[1])
+      for j in range(0,total_coins):
+        split_line = content[i+1+j].split(" ")
+
+        coin_rows.append(split_line[0])
+      return coin_rows
+  return coin_rows
+
+def get_rows(who):
+  #who is zack,jimmy,nick
+  first_letter = who[0].upper()
+  coin_rows = []
+  with open("coins.txt") as f:
+    content = f.readlines()
+  content = [x.strip() for x in content]
+
+  for i in range(0,len(content)):
+    split_line = content[i].split(" ")
+    if split_line[0] == first_letter:
+      total_coins = int(split_line[1])
+      for j in range(0,total_coins):
+        split_line = content[i+1+j].split(" ")
+        if who == "jimmy":
+          bought = 0
+        else:
+          bought = float(split_line[2])
+
+        coin_rows.append({"id": split_line[0], "amt": float(split_line[1]), "bought": bought})
+      return coin_rows
+  return coin_rows
+
+@main.route('/<name>')
+def main_route(name):
+  if name == "":
+    name = "zack"
+  coin_rows = get_rows(name)
+  return render_template("main.html",owned=owned_dict,coin_rows=coin_rows)
 
 
-@main.route('/nick')
-def nick_route():
-  coin_row = []
-  for coin in nick_owned_dict:
-    #print(i, owned[i])
-    coin_row.append({"id": coin, "amt": nick_owned_dict[coin]})
-  return render_template("main.html",owned=nick_owned_dict,coin_rows=coin_row)
-
-@main.route('/price')
-def price_route():
+@main.route('/<name>/price')
+def price_route(name):
+  owned = get_owned(name)
   arr = {}
   url = "https://coinmarketcap.com/all/views/all/"
   soup = BS(urllib.urlopen(url).read(), "lxml")
 
-  for coin in owned_dict:
+  #print(owned)
+  for coin in owned:
     full_id = "id-"+full_names[coin]
     row = soup.find("tr", {"id": full_id})
-    #row = coin.find_all("tr", id=full_id)
     val = row.find("a", class_="price")
     inc_dec = row.find("td", class_="percent-24h").text
     inc_dec_1h = row.find("td", class_="percent-1h").text
@@ -98,27 +131,5 @@ def price_route():
       "1h": inc_dec_1h,
     }
 
-  #print(arr)
-  return jsonify(arr)
-
-@main.route('/nickprice')
-def nick_price_route():
-  arr = {}
-  url = "https://coinmarketcap.com/all/views/all/"
-  soup = BS(urllib.urlopen(url).read(), "lxml")
-
-
-  for coin in nick_owned_dict:
-    full_id = "id-"+full_names[coin]
-    row = soup.find("tr", {"id": full_id})
-    #row = coin.find_all("tr", id=full_id)
-    val = row.find("a", class_="price")
-    inc_dec = row.find("td", class_="percent-24h").text
-    inc_dec_1h = row.find("td", class_="percent-1h").text
-    arr[coin] = {
-      "price": float(val.text[1:]),
-      "24h": inc_dec,
-      "1h": inc_dec_1h,
-    }
   #print(arr)
   return jsonify(arr)

@@ -32,6 +32,18 @@
     <td id="my_profit">$0</td>
   </tr>
 </table>
-
+<script>
+  var coins = [];
+  var owned = {};
+  var bought = {};
+</script>
+{% for coin in coin_rows %}
+<script>
+  coins.push("{{coin.id}}");
+  owned["{{coin.id}}"] = {{coin.amt}};
+  bought["{{coin.id}}"] = {{coin.bought}};
+</script>
+{% endfor %}
+<script src="/static/js/main.js"></script>
 {% endblock %}
 
