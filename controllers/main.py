@@ -1,6 +1,11 @@
 from flask import *
 import json
 from bs4 import BeautifulSoup as BS
+from binance.client import Client
+try:
+  import controllers.constants as constants
+except:
+  import constants
 try:
   import urllib2 as urllib
 except:
@@ -9,44 +14,6 @@ except:
 main = Blueprint('main', __name__, template_folder='views')
 
 #eth 0.24861740 804.45
-
-
-owned = [
-  "btc", 0.01845468,
-  "eth", 0.24861740,
-  "ltc", 0.56849907,
-  "req", 197.802,
-  "wabi", 29.956,
-  "xrp", 81.93,
-  #"neo", .00955,
-  #"icx", 5,
-  "vet", 34.932,
-  #"qtum", 0.00872,
-  #"eng", 23.976,
-  "trx", 999.999,
-  "ost", 164.835
-]
-
-owned_dict = {
-  "btc": 0.01845468,
-  "eth": 0.24861740,
-  "ltc": 0.56849907,
-  "req": 197.802,
-  "wabi": 29.956,
-  "xrp": 81.93,
-  #"neo": .00955,
-  #"icx": 5,
-  "vet": 34.932,
-  #"qtum": 0.00872,
-  #"eng": 23.976,
-  "trx": 999.999,
-  "ost": 164.835
-}
-
-nick_owned_dict = {
-  "trx": 397.602,
-  "xrp": 23.976
-}
 
 full_names = {
   "btc": "bitcoin",
@@ -61,14 +28,18 @@ full_names = {
   "vet": "vechain",
   #"qtum": "qtum",
   #"eng": "enigma-project",
+  "snm": "sonm",
   "trx": "tron",
   "ost": "simple-token"
 }
 
+pre_url = "/home/zhecht/bitcoin/"
+pre_url = ""
+
 def get_owned(who):
   first_letter = who[0].upper()
   coin_rows = []
-  with open("/home/zhecht/bitcoin/coins.txt") as f:
+  with open(pre_url+"coins.txt") as f:
     content = f.readlines()
   content = [x.strip() for x in content]
 
@@ -87,7 +58,7 @@ def get_rows(who):
   #who is zack,jimmy,nick
   first_letter = who[0].upper()
   coin_rows = []
-  with open("/home/zhecht/bitcoin/coins.txt") as f:
+  with open(pre_url+"coins.txt") as f:
     content = f.readlines()
   content = [x.strip() for x in content]
 
@@ -107,30 +78,51 @@ def get_rows(who):
       return coin_rows
   return coin_rows
 
+def get_price_dict(price_list):
+  price_dict = {}
+  for price in price_list:
+    price_dict[price["symbol"]] = price["price"]
+  return price_dict 
+
 @main.route('/<name>')
 def main_route(name):
   if name == "":
     name = "zack"
   coin_rows = get_rows(name)
-  return render_template("main.html",owned=owned_dict,coin_rows=coin_rows)
+  return render_template("main.html",coin_rows=coin_rows)
 
 
 @main.route('/<name>/price')
 def price_route(name):
+  client = Client(constants.API_KEY, constants.SECRET)
+  prices = get_price_dict(client.get_all_tickers())
+
   owned = get_owned(name)
   arr = {}
   url = "https://coinmarketcap.com/all/views/all/"
   soup = BS(urllib.urlopen(url).read(), "lxml")
 
   #print(owned)
+  row = soup.find("tr", {"id": "id-bitcoin"})
+  val = row.find("a", class_="price")
+  btc_price = float(val.text[1:])
   for coin in owned:
     full_id = "id-"+full_names[coin]
     row = soup.find("tr", {"id": full_id})
     val = row.find("a", class_="price")
     inc_dec = row.find("td", class_="percent-24h").text
     inc_dec_1h = row.find("td", class_="percent-1h").text
+    key = coin.upper()+"BTC"
+    if coin == "btc":
+      price = float(val.text[1:])
+    elif coin == "eth":
+      price = float(prices[coin.upper()+"BTC"])*btc_price
+    elif coin == "vet":
+      price = float(prices["VENBTC"])*btc_price
+    else:
+      price = float(prices[coin.upper()+"BTC"])*btc_price
     arr[coin] = {
-      "price": float(val.text[1:]),
+      "price": float("{0:.4f}".format(price)),
       "24h": inc_dec,
       "1h": inc_dec_1h,
     }
