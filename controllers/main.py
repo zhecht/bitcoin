@@ -30,7 +30,8 @@ full_names = {
   #"eng": "enigma-project",
   "snm": "sonm",
   "trx": "tron",
-  "ost": "simple-token"
+  "ost": "simple-token",
+  "powr": "power-ledger"
 }
 
 pre_url = "/home/zhecht/bitcoin/"
