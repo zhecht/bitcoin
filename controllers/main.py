@@ -10,6 +10,7 @@ main = Blueprint('main', __name__, template_folder='views')
 
 #eth 0.24861740 804.45
 
+
 owned = [
   "btc", 0.01845468,
   "eth", 0.24861740,
