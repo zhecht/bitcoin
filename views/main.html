@@ -7,8 +7,8 @@
     <th>1h trend</th>
     <th>24h trend</th>
     <th>Amt Owned</th>
-    <th>USD</th>
-    <th>Bought @</th>
+    <th>BTC</th>
+    <th>Bought @ (BTC)</th>
     <th>Profit</th>
   </tr>
   {% for row in coin_rows %}
@@ -41,7 +41,7 @@
 <script>
   coins.push("{{coin.id}}");
   owned["{{coin.id}}"] = {{coin.amt}};
-  bought["{{coin.id}}"] = {{coin.bought}};
+  //bought["{{coin.id}}"] = {{coin.bought}}.toFixed(8);
 </script>
 {% endfor %}
 <script src="/static/js/main.js"></script>

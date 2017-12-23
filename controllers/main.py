@@ -22,61 +22,70 @@ full_names = {
   "req": "request-network",
   "wabi": "wabi",
   "xrp": "ripple",
-  #"neo": "neo",
-  #"icx": "icon",
+  "neo": "neo",
+  "icx": "icon",
   "iota": "iota",
   "vet": "vechain",
-  #"qtum": "qtum",
-  #"eng": "enigma-project",
+  "qtum": "qtum",
+  "eng": "enigma-project",
   "snm": "sonm",
   "trx": "tron",
   "ost": "simple-token",
-  "powr": "power-ledger"
+  "lend": "ethlend",
+  "powr": "power-ledger",
+  "ven": "vechain"
 }
 
 pre_url = "/home/zhecht/bitcoin/"
-#pre_url = ""
+pre_url = ""
 
 def get_owned(who):
+
   first_letter = who[0].upper()
   coin_rows = []
-  with open(pre_url+"coins.txt") as f:
+  with open(pre_url+"static/%s/coins.txt" % who) as f:
     content = f.readlines()
   content = [x.strip() for x in content]
 
   for i in range(0,len(content)):
     split_line = content[i].split(" ")
-    if split_line[0] == first_letter:
-      total_coins = int(split_line[1])
-      for j in range(0,total_coins):
-        split_line = content[i+1+j].split(" ")
+    coin_rows.append(split_line[0])
+  return coin_rows
 
-        coin_rows.append(split_line[0])
-      return coin_rows
+def convert_eth_btc(eth):
+  client = Client(constants.API_KEY, constants.SECRET)
+  res = client.get_symbol_ticker(symbol="ETHBTC")
+  return eth*float(res["price"])
+
+def get_row_amts(who):
+  #who is zack,jimmy,nick
+  first_letter = who[0].upper()
+  coin_rows = []
+  with open(pre_url+"static/%s/coins.txt" % who) as f:
+    content = f.readlines()
+  content = [x.strip() for x in content]
+
+  for i in range(0,len(content)):
+    split_line = content[i].split(" ")
+    coin_rows.append({"id": split_line[0], "amt": float(split_line[1])})
   return coin_rows
 
 def get_rows(who):
   #who is zack,jimmy,nick
   first_letter = who[0].upper()
   coin_rows = []
-  with open(pre_url+"coins.txt") as f:
+  with open(pre_url+"static/%s/coins.txt" % who) as f:
     content = f.readlines()
   content = [x.strip() for x in content]
 
   for i in range(0,len(content)):
     split_line = content[i].split(" ")
-    if split_line[0] == first_letter:
-      total_coins = int(split_line[1])
-      for j in range(0,total_coins):
-        split_line = content[i+1+j].split(" ")
-        if who == "jimmy":
-          bought = 0
-        else:
-          print(split_line)
-          bought = float(split_line[2])
+    btc_price = float(split_line[2])
+    eth_price = float(split_line[3])
+    eth_in_btc = convert_eth_btc(eth_price)
 
-        coin_rows.append({"id": split_line[0], "amt": float(split_line[1]), "bought": bought})
-      return coin_rows
+    btc_price += eth_in_btc
+    coin_rows.append({"id": split_line[0], "amt": float(split_line[1]), "bought": btc_price})
   return coin_rows
 
 def get_price_dict(price_list):
@@ -87,18 +96,27 @@ def get_price_dict(price_list):
 
 @main.route('/<name>')
 def main_route(name):
+  if name == "rhcp_favicon.png":
+    return
   if name == "":
     name = "zack"
-  coin_rows = get_rows(name)
+  coin_rows = get_row_amts(name)
   return render_template("main.html",coin_rows=coin_rows)
 
+@main.route('/<name>/arrays')
+def array_route(name):
+  coin_rows = get_rows(name)
+  return jsonify(coin_rows)
 
 @main.route('/<name>/price')
 def price_route(name):
+  if name == "rhcp_favicon.png":
+    return
   client = Client(constants.API_KEY, constants.SECRET)
   prices = get_price_dict(client.get_all_tickers())
 
   owned = get_owned(name)
+  coin_rows = get_rows(name)
   arr = {}
   url = "https://coinmarketcap.com/all/views/all/"
   soup = BS(urllib.urlopen(url).read(), "lxml")
@@ -117,13 +135,19 @@ def price_route(name):
     if coin == "btc":
       price = float(val.text[1:])
     elif coin == "eth":
-      price = float(prices[coin.upper()+"BTC"])*btc_price
+      price = float(prices[coin.upper()+"BTC"])
     elif coin == "vet":
-      price = float(prices["VENBTC"])*btc_price
+      price = float(prices["VENBTC"])
     else:
-      price = float(prices[coin.upper()+"BTC"])*btc_price
+      price = float(prices[coin.upper()+"BTC"])
+
+    usd_price = btc_price
+    if coin != "btc":
+      usd_price = price * btc_price
     arr[coin] = {
-      "price": float("{0:.4f}".format(price)),
+      "curr_btc_price": float("{0:.4f}".format(btc_price)),
+      "price": float("{0:.4f}".format(usd_price)),
+      "btc_price": float("{0:.8f}".format(price)),
       "24h": inc_dec,
       "1h": inc_dec_1h,
     }
