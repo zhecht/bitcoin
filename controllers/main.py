@@ -131,6 +131,7 @@ def price_route(name):
     val = row.find("a", class_="price")
     inc_dec = row.find("td", class_="percent-24h").text
     inc_dec_1h = row.find("td", class_="percent-1h").text
+    inc_dec_7d = row.find("td", class_="percent-7d").text
     key = coin.upper()+"BTC"
     if coin == "btc":
       price = float(val.text[1:])
@@ -150,6 +151,7 @@ def price_route(name):
       "btc_price": float("{0:.8f}".format(price)),
       "24h": inc_dec,
       "1h": inc_dec_1h,
+      "7d": inc_dec_7d,
     }
 
   #print(arr)

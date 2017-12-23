@@ -9,6 +9,7 @@ function timeout() {
       var curr_btc_price = data[coins[i]]["curr_btc_price"];
       var price = data[coins[i]]["price"];
       var btc_price = (data[coins[i]]["btc_price"] * parseFloat($("#"+coins[i]+" .owned").text())).toFixed(8);
+      var week_trend = data[coins[i]]["7d"];
       var day_trend = data[coins[i]]["24h"];
       var hour_trend = data[coins[i]]["1h"];
       var curr_total = (price * owned[coins[i]]).toFixed(2);
@@ -31,6 +32,11 @@ function timeout() {
       $("#"+coins[i]+" .usd_profit").text("$"+(btc_price*curr_btc_price).toFixed(2));
       $("#"+coins[i]+" .usd_bought").text("$"+(bought_total*curr_btc_price).toFixed(2));
 
+      if (week_trend[0] === "-") {
+        $("#"+coins[i]+" .7d").css("color", "red");
+      } else {
+        $("#"+coins[i]+" .7d").css("color", "green");
+      }
       if (day_trend[0] === "-") {
         $("#"+coins[i]+" .24h").css("color", "red");
       } else {
