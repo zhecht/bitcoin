@@ -124,7 +124,7 @@ def price_route(name):
   #print(owned)
   row = soup.find("tr", {"id": "id-bitcoin"})
   val = row.find("a", class_="price")
-  btc_price = prices["BTCUSDT"]
+  btc_price = float(prices["BTCUSDT"])
   for coin in owned:
     full_id = "id-"+full_names[coin]
     row = soup.find("tr", {"id": full_id})
