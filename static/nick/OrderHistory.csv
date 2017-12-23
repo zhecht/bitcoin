@@ -1,0 +1,7 @@
+Date,Pair,Type,Order Price,Order Amount,Avg Trading Price,Filled,Total,status
+2017-12-21 15:50:53,TRXETH,BUY,0.0,398.0,0.0000594,398.0,0.0236412,Filled
+,Date,Trading Price,Filled,Total,Fee,,,
+,2017-12-21 15:50:53,0.0000594,398,0.02364120,0.39800000TRX,,,
+2017-12-21 15:44:05,XRPETH,BUY,0.0,24.0,0.001271,24.0,0.030504,Filled
+,Date,Trading Price,Filled,Total,Fee,,,
+,2017-12-21 15:44:05,0.001271,24,0.03050400,0.02400000XRP,,,

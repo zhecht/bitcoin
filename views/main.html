@@ -9,6 +9,8 @@
     <th>Amt Owned</th>
     <th>BTC</th>
     <th>Bought @ (BTC)</th>
+    <th>USD</th>
+    <th>Bought @ (USD)</th>
     <th>Profit</th>
   </tr>
   {% for row in coin_rows %}
@@ -20,13 +22,15 @@
     <td class="owned">{{row.amt}}</td>
     <td class="profit">$0</td>
     <td class="bought">$0</td>
+    <td class="usd_profit">$0</td>
+    <td class="usd_bought">$0</td>
     <td class="total_profit">$0</td>
   </tr>
   
 
   {% endfor %}
   <tr>
-    <td colspan="5"></td>
+    <td colspan="7"></td>
     <td id="my_total">$0</td>
     <td id="my_bought">$0</td>
     <td id="my_profit">$0</td>

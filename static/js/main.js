@@ -17,8 +17,8 @@ function timeout() {
       var total_profit = ((btc_price - bought_total) * curr_btc_price).toFixed(2);
       
       overall_profit += parseFloat(total_profit);
-      overall_bought += parseFloat(bought_total);
-      overall += parseFloat(btc_price);
+      overall_bought += parseFloat((bought_total*curr_btc_price).toFixed(2));
+      overall += parseFloat((btc_price*curr_btc_price).toFixed(2));
 
 
       $("#"+coins[i]+" .price").text("$"+price);
@@ -28,6 +28,8 @@ function timeout() {
       $("#"+coins[i]+" .profit").text(btc_price);
       $("#"+coins[i]+" .bought").text(bought_total);
       $("#"+coins[i]+" .total_profit").text("$"+total_profit);
+      $("#"+coins[i]+" .usd_profit").text("$"+(btc_price*curr_btc_price).toFixed(2));
+      $("#"+coins[i]+" .usd_bought").text("$"+(bought_total*curr_btc_price).toFixed(2));
 
       if (day_trend[0] === "-") {
         $("#"+coins[i]+" .24h").css("color", "red");
