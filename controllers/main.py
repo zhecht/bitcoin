@@ -33,7 +33,8 @@ full_names = {
   "ost": "simple-token",
   "lend": "ethlend",
   "powr": "power-ledger",
-  "ven": "vechain"
+  "ven": "vechain",
+  "elf": "aelf"
 }
 
 pre_url = "/home/zhecht/bitcoin/"
