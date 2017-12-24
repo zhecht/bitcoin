@@ -134,8 +134,8 @@ def price_route(name):
     full_id = "id-"+full_names[coin]
     row = soup.find("tr", {"id": full_id})
     val = row.find("a", class_="price")
-    inc_dec = row.find_all("td")[-3].text
-    inc_dec_1h = row.find_all("td")[-2].text
+    inc_dec = row.find_all("td")[-2].text
+    inc_dec_1h = row.find_all("td")[-3].text
     inc_dec_7d = row.find_all("td")[-1].text
     
     key = coin.upper()+"BTC"
