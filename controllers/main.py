@@ -34,7 +34,9 @@ full_names = {
   "lend": "ethlend",
   "powr": "power-ledger",
   "ven": "vechain",
-  "elf": "aelf"
+  "elf": "aelf",
+  "ada": "cardano",
+  "btg": "bitcoin-gold"
 }
 
 pre_url = "/home/zhecht/bitcoin/"
