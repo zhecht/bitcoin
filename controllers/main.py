@@ -36,7 +36,9 @@ full_names = {
   "ven": "vechain",
   "elf": "aelf",
   "ada": "cardano",
-  "btg": "bitcoin-gold"
+  "btg": "bitcoin-gold",
+  "brd": "bread",
+  "gvt": "genesis-vision"
 }
 
 pre_url = "/home/zhecht/bitcoin/"
