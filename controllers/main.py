@@ -38,7 +38,8 @@ full_names = {
   "ada": "cardano",
   "btg": "bitcoin-gold",
   "brd": "bread",
-  "gvt": "genesis-vision"
+  "gvt": "genesis-vision",
+  "xmr": "monero"
 }
 
 pre_url = "/home/zhecht/bitcoin/"
