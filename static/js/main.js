@@ -73,11 +73,11 @@ $(window).on('load', function() {
   } else if (window.location.pathname == "/jimmy") {
     url = "/jimmy/";
   }
-  $.get(url+"arrays", function(data){
+  /*$.get(url+"arrays", function(data){
     for (var i = 0; i < data.length; ++i) {
       bought[data[i]["id"]] = data[i]["bought"].toFixed(8);
     }
-  });
+  });*/
   timeout();
   setInterval(timeout, 10000);
 });

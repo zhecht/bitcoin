@@ -106,7 +106,7 @@ def main_route(name):
     return
   if name == "":
     name = "zack"
-  coin_rows = get_row_amts(name)
+  coin_rows = get_rows(name)
   return render_template("main.html",coin_rows=coin_rows)
 
 @main.route('/<name>/arrays')
@@ -128,9 +128,14 @@ def price_route(name):
   soup = BS(urllib.urlopen(url).read(), "lxml")
 
   #print(owned)
-  row = soup.find("tr", {"id": "id-bitcoin"})
-  val = row.find("a", class_="price")
+  #row = soup.find("tr", {"id": "id-bitcoin"})
+  #val = row.find("a", class_="price")
+  #eth_row = soup.find("tr", {"id": "id-ethereum"})
+  #eth = eth_row.find("a", class_="price")
   btc_price = float(prices["BTCUSDT"])
+
+  #btc_price = float(val.text[1:])
+  #eth_price = float(val.text[1:])
   for coin in owned:
     full_id = "id-"+full_names[coin]
     row = soup.find("tr", {"id": full_id})
@@ -146,8 +151,10 @@ def price_route(name):
       price = float(prices[coin.upper()+"BTC"])
     elif coin == "vet":
       price = float(prices["VENBTC"])
+      eth_price = float(prices["VENETH"])
     else:
       price = float(prices[coin.upper()+"BTC"])
+      eth_price = float(prices[coin.upper()+"ETH"])
 
     usd_price = btc_price
     if coin != "btc":
@@ -155,6 +162,7 @@ def price_route(name):
     arr[coin] = {
       "curr_btc_price": float("{0:.4f}".format(btc_price)),
       "price": float("{0:.4f}".format(usd_price)),
+      "eth_price": float("{0:.8f}".format(eth_price)),
       "btc_price": float("{0:.8f}".format(price)),
       "24h": inc_dec,
       "1h": inc_dec_1h,
