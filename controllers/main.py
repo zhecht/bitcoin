@@ -39,7 +39,8 @@ full_names = {
   "btg": "bitcoin-gold",
   "brd": "bread",
   "gvt": "genesis-vision",
-  "xmr": "monero"
+  "xmr": "monero",
+  "omg": "omisego"
 }
 
 pre_url = "/home/zhecht/bitcoin/"
