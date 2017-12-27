@@ -41,7 +41,8 @@ full_names = {
   "gvt": "genesis-vision",
   "xmr": "monero",
   "omg": "omisego",
-  "mod": "modum"
+  "mod": "modum",
+  "poe": "poet"
 }
 
 pre_url = "/home/zhecht/bitcoin/"
