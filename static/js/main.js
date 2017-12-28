@@ -33,7 +33,8 @@ function timeout() {
 
       $("#"+coins[i]+" .profit").text(btc_price);
       $("#"+coins[i]+" .bought").text(bought_total);
-      $("#"+coins[i]+" .total_profit").text("$"+total_profit+" ("+(((usd_profit - usd_bought) / usd_profit) * 100).toFixed(2)+")");
+      //$("#"+coins[i]+" .total_profit").text("$"+total_profit+" ("+(((usd_profit - usd_bought) / usd_profit) * 100).toFixed(2)+"%)");
+      $("#"+coins[i]+" .total_profit").text("$"+total_profit);
       $("#"+coins[i]+" .usd_profit").text("$"+usd_profit);
       $("#"+coins[i]+" .usd_bought").text("$"+usd_bought);
 
