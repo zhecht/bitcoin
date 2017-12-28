@@ -18,6 +18,8 @@ function timeout() {
       //var bought_total = (bought[coins[i]] * owned[coins[i]]).toFixed(2);
       var bought_total = bought[coins[i]];
       var total_profit = ((btc_price - bought_total) * curr_btc_price).toFixed(2);
+      var usd_profit = (btc_price*curr_btc_price).toFixed(2);
+      var usd_bought = (bought_total*curr_btc_price).toFixed(2);
       
       overall_profit += parseFloat(total_profit);
       overall_bought += parseFloat((bought_total*curr_btc_price).toFixed(2));
@@ -31,9 +33,9 @@ function timeout() {
 
       $("#"+coins[i]+" .profit").text(btc_price);
       $("#"+coins[i]+" .bought").text(bought_total);
-      $("#"+coins[i]+" .total_profit").text("$"+total_profit);
-      $("#"+coins[i]+" .usd_profit").text("$"+(btc_price*curr_btc_price).toFixed(2));
-      $("#"+coins[i]+" .usd_bought").text("$"+(bought_total*curr_btc_price).toFixed(2));
+      $("#"+coins[i]+" .total_profit").text("$"+total_profit+" ("+(((usd_profit - usd_bought) / usd_profit) * 100).toFixed(2)+")");
+      $("#"+coins[i]+" .usd_profit").text("$"+usd_profit);
+      $("#"+coins[i]+" .usd_bought").text("$"+usd_bought);
 
       if (week_trend[0] === "-") {
         $("#"+coins[i]+" .7d").css("color", "red");
@@ -59,7 +61,7 @@ function timeout() {
 
     $("#my_total").text(overall.toFixed(2));
     $("#my_bought").text(overall_bought.toFixed(2));
-    $("#my_profit").text("$"+overall_profit.toFixed(2)+" ("+(((overall - overall_bought) / overall) * 100).toFixed(2)+")");
+    $("#my_profit").text("$"+overall_profit.toFixed(2));
     if (overall_profit < 0) {
       $("#my_profit").css("color", "red");
     } else {
