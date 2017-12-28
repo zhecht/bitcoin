@@ -42,7 +42,8 @@ full_names = {
   "xmr": "monero",
   "omg": "omisego",
   "mod": "modum",
-  "poe": "poet"
+  "poe": "poet",
+  "ark": "ark"
 }
 
 pre_url = "/home/zhecht/bitcoin/"
