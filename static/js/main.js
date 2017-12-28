@@ -59,7 +59,7 @@ function timeout() {
 
     $("#my_total").text(overall.toFixed(2));
     $("#my_bought").text(overall_bought.toFixed(2));
-    $("#my_profit").text("$"+overall_profit.toFixed(2));
+    $("#my_profit").text("$"+overall_profit.toFixed(2)+" ("+(((overall - overall_bought) / overall) * 100).toFixed(2)+")");
     if (overall_profit < 0) {
       $("#my_profit").css("color", "red");
     } else {
