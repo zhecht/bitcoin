@@ -150,6 +150,7 @@ def price_route(name):
     inc_dec_1h = all_tds[-3].text
     inc_dec_7d = all_tds[-1].text
     
+    
     key = coin.upper()+"BTC"
     if coin == "btc":
       price = float(val.text[1:])
@@ -170,7 +171,7 @@ def price_route(name):
       "price": float("{0:.4f}".format(usd_price)),
       "eth_price": float("{0:.8f}".format(eth_price)),
       "btc_price": float("{0:.8f}".format(price)),
-      "market_cap": market_cap,
+      "cap": market_cap,
       "24h": inc_dec,
       "1h": inc_dec_1h,
       "7d": inc_dec_7d
