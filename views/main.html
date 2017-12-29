@@ -4,6 +4,7 @@
   <tr>
     <th></th>
     <th>Price</th>
+    <th>Cap</th>
     <th>1h trend</th>
     <th>24h trend</th>
     <th>7d trend</th>
@@ -17,6 +18,7 @@
   {% for row in coin_rows %}
   <tr id="{{row.id}}">
     <td class="title">{{row.id}}</td>
+    <td class="cap">$0</td>
     <td class="price">$0</td>
     <td class="1h">0%</td>
     <td class="24h">0%</td>

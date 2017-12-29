@@ -11,6 +11,7 @@ function timeout() {
       var price = data[coins[i]]["price"];
       var btc_price = (data[coins[i]]["btc_price"] * parseFloat($("#"+coins[i]+" .owned").text())).toFixed(8);
 
+      var cap = data[coins[i]["market_cap"]];
       var week_trend = data[coins[i]]["7d"];
       var day_trend = data[coins[i]]["24h"];
       var hour_trend = data[coins[i]]["1h"];
@@ -27,6 +28,7 @@ function timeout() {
 
 
       $("#"+coins[i]+" .price").text("$"+price);
+      $("#"+coins[i]+" .cap").text(cap);
       $("#"+coins[i]+" .7d").text(week_trend);
       $("#"+coins[i]+" .24h").text(day_trend);
       $("#"+coins[i]+" .1h").text(hour_trend);

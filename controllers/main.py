@@ -144,9 +144,11 @@ def price_route(name):
     full_id = "id-"+full_names[coin]
     row = soup.find("tr", {"id": full_id})
     val = row.find("a", class_="price")
-    inc_dec = row.find_all("td")[-2].text
-    inc_dec_1h = row.find_all("td")[-3].text
-    inc_dec_7d = row.find_all("td")[-1].text
+    all_tds = row.find_all("td")
+    market_cap = all_tds[3].text
+    inc_dec = all_tds[-2].text
+    inc_dec_1h = all_tds[-3].text
+    inc_dec_7d = all_tds[-1].text
     
     key = coin.upper()+"BTC"
     if coin == "btc":
@@ -168,6 +170,7 @@ def price_route(name):
       "price": float("{0:.4f}".format(usd_price)),
       "eth_price": float("{0:.8f}".format(eth_price)),
       "btc_price": float("{0:.8f}".format(price)),
+      "market_cap": market_cap,
       "24h": inc_dec,
       "1h": inc_dec_1h,
       "7d": inc_dec_7d
