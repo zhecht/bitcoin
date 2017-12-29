@@ -145,7 +145,7 @@ def price_route(name):
     row = soup.find("tr", {"id": full_id})
     val = row.find("a", class_="price")
     all_tds = row.find_all("td")
-    market_cap = all_tds[3].text
+    market_cap = all_tds[3].text.strip()
     inc_dec = all_tds[-2].text
     inc_dec_1h = all_tds[-3].text
     inc_dec_7d = all_tds[-1].text

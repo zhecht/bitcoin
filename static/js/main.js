@@ -26,7 +26,6 @@ function timeout() {
       overall_bought += parseFloat((bought_total*curr_btc_price).toFixed(2));
       overall += parseFloat((btc_price*curr_btc_price).toFixed(2));
 
-
       $("#"+coins[i]+" .price").text("$"+price);
       $("#"+coins[i]+" .cap").text(cap);
       $("#"+coins[i]+" .7d").text(week_trend);
