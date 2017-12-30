@@ -62,15 +62,15 @@ def get_owned(who):
     coin_rows.append(split_line[0])
   return coin_rows
 
-def convert_eth_btc(eth):
+def get_eth_btc():
   client = Client(constants.API_KEY, constants.SECRET)
   res = client.get_symbol_ticker(symbol="ETHBTC")
-  return eth*float(res["price"])
+  return float(res["price"])
 
-def convert_btc_eth(btc):
-  client = Client(constants.API_KEY, constants.SECRET)
-  res = client.get_symbol_ticker(symbol="BTCETH")
-  return btc*float(res["price"])
+def convert_eth_btc(eth):
+  price = get_eth_btc()
+  return eth*price
+
 
 def get_row_amts(who):
   #who is zack,jimmy,nick
@@ -93,12 +93,17 @@ def get_rows(who):
     content = f.readlines()
   content = [x.strip() for x in content]
 
+  client = Client(constants.API_KEY, constants.SECRET)
+  res = client.get_symbol_ticker(symbol="ETHBTC")
+  eth_btc = float(res["price"])
+  btc_eth = 1.0 / eth_btc
+
   for i in range(0,len(content)):
     split_line = content[i].split(" ")
     btc_price = float(split_line[2])
     eth_price = float(split_line[3])
-    eth_in_btc = convert_eth_btc(eth_price)
-    btc_in_eth = convert_btc_eth(btc_price)
+    eth_in_btc = eth_price * eth_btc
+    btc_in_eth = btc_price * btc_eth
 
     btc_price += eth_in_btc
     eth_price += btc_in_eth
@@ -144,7 +149,7 @@ def price_route(name):
   #eth_row = soup.find("tr", {"id": "id-ethereum"})
   #eth = eth_row.find("a", class_="price")
   btc_price = float(prices["BTCUSDT"])
-  eth_usdt_price = float(prices["ETHUSDT"])
+  curr_eth_price = float(prices["ETHUSDT"])
 
   #btc_price = float(val.text[1:])
   #eth_price = float(val.text[1:])
@@ -171,9 +176,9 @@ def price_route(name):
       price = float(prices[coin.upper()+"BTC"])
       eth_price = float(prices[coin.upper()+"ETH"])
 
-    usd_price = btc_price
-    if coin != "btc":
-      usd_price = price * btc_price
+    usd_price = curr_eth_price
+    if coin != "eth":
+      usd_price = eth_price * curr_eth_price
     arr[coin] = {
       "curr_btc_price": float("{0:.4f}".format(btc_price)),
       "curr_eth_price": float("{0:.4f}".format(curr_eth_price)),

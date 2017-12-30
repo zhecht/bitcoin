@@ -12,6 +12,9 @@ function timeout() {
       var price = data[coins[i]]["price"];
       var btc_price = (data[coins[i]]["btc_price"] * parseFloat($("#"+coins[i]+" .owned").text())).toFixed(8);
       var eth_price = (data[coins[i]]["eth_price"] * parseFloat($("#"+coins[i]+" .owned").text())).toFixed(8);
+      if (i == (coins.length - 1)) {
+        eth_price = parseFloat($("#"+coins[i]+" .owned").text());
+      }
 
       var cap = data[coins[i]]["cap"];
       var week_trend = data[coins[i]]["7d"];
@@ -20,7 +23,7 @@ function timeout() {
       var curr_total = (price * owned[coins[i]]).toFixed(2);
       //var bought_total = (bought[coins[i]] * owned[coins[i]]).toFixed(2);
       var bought_total = bought[coins[i]];
-      var total_profit = ((eth_price - bought_total) * curr_btc_price).toFixed(2);
+      var total_profit = ((eth_price - bought_total) * curr_eth_price).toFixed(2);
       var usd_profit = (eth_price*curr_eth_price).toFixed(2);
       var usd_bought = (bought_total*curr_eth_price).toFixed(2);
       
