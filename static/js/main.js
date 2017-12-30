@@ -8,8 +8,10 @@ function timeout() {
     //console.log(data);
     for (var i = 0; i < coins.length; ++i) {
       var curr_btc_price = data[coins[i]]["curr_btc_price"];
+      var curr_eth_price = data[coins[i]]["curr_eth_price"];
       var price = data[coins[i]]["price"];
       var btc_price = (data[coins[i]]["btc_price"] * parseFloat($("#"+coins[i]+" .owned").text())).toFixed(8);
+      var eth_price = (data[coins[i]]["eth_price"] * parseFloat($("#"+coins[i]+" .owned").text())).toFixed(8);
 
       var cap = data[coins[i]]["cap"];
       var week_trend = data[coins[i]]["7d"];
@@ -18,13 +20,13 @@ function timeout() {
       var curr_total = (price * owned[coins[i]]).toFixed(2);
       //var bought_total = (bought[coins[i]] * owned[coins[i]]).toFixed(2);
       var bought_total = bought[coins[i]];
-      var total_profit = ((btc_price - bought_total) * curr_btc_price).toFixed(2);
-      var usd_profit = (btc_price*curr_btc_price).toFixed(2);
-      var usd_bought = (bought_total*curr_btc_price).toFixed(2);
+      var total_profit = ((eth_price - bought_total) * curr_btc_price).toFixed(2);
+      var usd_profit = (eth_price*curr_eth_price).toFixed(2);
+      var usd_bought = (bought_total*curr_eth_price).toFixed(2);
       
       overall_profit += parseFloat(total_profit);
-      overall_bought += parseFloat((bought_total*curr_btc_price).toFixed(2));
-      overall += parseFloat((btc_price*curr_btc_price).toFixed(2));
+      overall_bought += parseFloat((bought_total*curr_eth_price).toFixed(2));
+      overall += parseFloat((eth_price*curr_eth_price).toFixed(2));
 
       $("#"+coins[i]+" .price").text("$"+price);
       $("#"+coins[i]+" .cap").text(cap);
@@ -32,7 +34,7 @@ function timeout() {
       $("#"+coins[i]+" .24h").text(day_trend);
       $("#"+coins[i]+" .1h").text(hour_trend);
 
-      $("#"+coins[i]+" .profit").text(btc_price);
+      $("#"+coins[i]+" .profit").text(eth_price);
       $("#"+coins[i]+" .bought").text(bought_total);
       //$("#"+coins[i]+" .total_profit").text("$"+total_profit+" ("+(((usd_profit - usd_bought) / usd_profit) * 100).toFixed(2)+"%)");
       $("#"+coins[i]+" .total_profit").text("$"+total_profit);

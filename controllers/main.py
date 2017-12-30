@@ -67,6 +67,11 @@ def convert_eth_btc(eth):
   res = client.get_symbol_ticker(symbol="ETHBTC")
   return eth*float(res["price"])
 
+def convert_btc_eth(btc):
+  client = Client(constants.API_KEY, constants.SECRET)
+  res = client.get_symbol_ticker(symbol="BTCETH")
+  return btc*float(res["price"])
+
 def get_row_amts(who):
   #who is zack,jimmy,nick
   first_letter = who[0].upper()
@@ -93,9 +98,11 @@ def get_rows(who):
     btc_price = float(split_line[2])
     eth_price = float(split_line[3])
     eth_in_btc = convert_eth_btc(eth_price)
+    btc_in_eth = convert_btc_eth(btc_price)
 
     btc_price += eth_in_btc
-    coin_rows.append({"id": split_line[0], "amt": float(split_line[1]), "bought": btc_price})
+    eth_price += btc_in_eth
+    coin_rows.append({"id": split_line[0], "amt": float(split_line[1]), "bought": eth_price})
   return coin_rows
 
 def get_price_dict(price_list):
@@ -137,6 +144,7 @@ def price_route(name):
   #eth_row = soup.find("tr", {"id": "id-ethereum"})
   #eth = eth_row.find("a", class_="price")
   btc_price = float(prices["BTCUSDT"])
+  eth_usdt_price = float(prices["ETHUSDT"])
 
   #btc_price = float(val.text[1:])
   #eth_price = float(val.text[1:])
@@ -168,6 +176,7 @@ def price_route(name):
       usd_price = price * btc_price
     arr[coin] = {
       "curr_btc_price": float("{0:.4f}".format(btc_price)),
+      "curr_eth_price": float("{0:.4f}".format(curr_eth_price)),
       "price": float("{0:.4f}".format(usd_price)),
       "eth_price": float("{0:.8f}".format(eth_price)),
       "btc_price": float("{0:.8f}".format(price)),
