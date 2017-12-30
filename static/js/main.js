@@ -12,7 +12,7 @@ function timeout() {
       var price = data[coins[i]]["price"];
       var btc_price = (data[coins[i]]["btc_price"] * parseFloat($("#"+coins[i]+" .owned").text())).toFixed(8);
       var eth_price = (data[coins[i]]["eth_price"] * parseFloat($("#"+coins[i]+" .owned").text())).toFixed(8);
-      if (i == (coins.length - 1)) {
+      if (i == (coins.length - 1) && (url == "/zack/")) {
         eth_price = parseFloat($("#"+coins[i]+" .owned").text());
       }
 
