@@ -43,11 +43,14 @@ full_names = {
   "omg": "omisego",
   "mod": "modum",
   "poe": "poet",
-  "ark": "ark"
+  "ark": "ark",
+  "xrb": "raiblocks",
+  "dbc": "deepbrain-chain",
+  "bnty": "bounty0x"
 }
 
 pre_url = "/home/zhecht/bitcoin/"
-#pre_url = ""
+pre_url = ""
 
 def get_owned(who):
 
@@ -136,6 +139,9 @@ def price_route(name):
     return
   client = Client(constants.API_KEY, constants.SECRET)
   prices = get_price_dict(client.get_all_tickers())
+  res = client.get_symbol_ticker(symbol="ETHBTC")
+  eth_btc = float(res["price"])
+  btc_eth = 1.0 / eth_btc
 
   owned = get_owned(name)
   coin_rows = get_rows(name)
@@ -172,6 +178,9 @@ def price_route(name):
     elif coin == "vet":
       price = float(prices["VENBTC"])
       eth_price = float(prices["VENETH"])
+    elif coin == "dbc" or coin == "bnty" or coin == "xrb":
+      price = float(all_tds[4].find("a").get("data-btc"))
+      eth_price = btc_eth * price
     else:
       price = float(prices[coin.upper()+"BTC"])
       eth_price = float(prices[coin.upper()+"ETH"])
