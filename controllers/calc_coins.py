@@ -29,22 +29,30 @@ if __name__ == '__main__':
           "id": altcoin.lower(),
           "amt": 0.0,
           "btc_price": 0.0,
-          "eth_price": 0.0
+          "eth_price": 0.0,
+          "btc_sold_price": 0.0,
+          "eth_sold_price": 0.0
         }
       if buy_sell == "BUY":
         all_coins[altcoin.lower()]["amt"] += amt
         all_coins[altcoin.lower()][base_coin.lower()+"_price"] += price
       else:
         all_coins[altcoin.lower()]["amt"] -= amt
+        #all_coins[altcoin.lower()][base_coin.lower()+"_sold_price"] += price
         all_coins[altcoin.lower()][base_coin.lower()+"_price"] -= price
   
   #end content
   f = open(pre_url+"static/%s/coins.txt" % who, "w")
   for coin in all_coins:
-    amt = str(all_coins[coin]["amt"])
-    btc = str(all_coins[coin]["btc_price"])
-    eth = str(all_coins[coin]["eth_price"])
-    f.write(coin+' '+amt+' '+btc+' '+eth+'\n')
+    if who == "zack" and (coin == "btc" or coin == "icx" or coin == "xvg" or coin == "ada" or coin == "ltc" or coin == "trx"):
+      nothing = 0
+    else:
+      amt = str(all_coins[coin]["amt"])
+      btc = str(all_coins[coin]["btc_price"])
+      eth = str(all_coins[coin]["eth_price"])
+      btc_sold = str(all_coins[coin]["btc_price"])
+      eth_sold = str(all_coins[coin]["eth_price"])
+      f.write(coin+' '+amt+' '+btc+' '+eth+' '+btc_sold+' '+eth_sold+'\n')
   f.close()
 
 
