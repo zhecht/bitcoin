@@ -6,6 +6,12 @@
   width: 100%; 
   background: #f1f1f1;
 }
+
+#night_mode {
+  position: absolute;
+  top: 1%; left: 1%;
+}
+
 table {
   position: absolute;
   width: 90%;
@@ -38,10 +44,14 @@ th {
   font-weight: bold;
 }
 
-.price, .owned, .profit {
+body.night {
+  background: black;
 }
 
-.price{
+tr.night {
+  border: 1px solid #f1f1f1;
 }
-#my_profit {
+
+td.night, th.night {
+  color: white;
 }

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+<input type="checkbox" id="night_mode"/>
 <table>
   <tr>
     <th></th>
@@ -44,6 +45,7 @@
   var coins = [];
   var owned = {};
   var bought = {};
+  var night_mode = false;
 </script>
 {% for coin in coin_rows %}
 <script>

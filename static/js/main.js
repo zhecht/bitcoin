@@ -90,3 +90,12 @@ $(window).on('load', function() {
   timeout();
   setInterval(timeout, 10000);
 });
+
+$("#night_mode").change(function() {
+  if (this.checked) {
+    night_mode = true;
+  } else {
+    night_mode = false;
+  }
+  $("body,th,td,tr").toggleClass("night");
+});
