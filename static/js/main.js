@@ -1,4 +1,6 @@
 var url = "/zack/";
+var green = "green";
+var red = "red";
 
 function timeout() {
 
@@ -45,24 +47,24 @@ function timeout() {
       $("#"+coins[i]+" .usd_bought").text("$"+usd_bought);
 
       if (week_trend[0] === "-") {
-        $("#"+coins[i]+" .7d").css("color", "red");
+        $("#"+coins[i]+" .7d").css("color", red);
       } else {
-        $("#"+coins[i]+" .7d").css("color", "green");
+        $("#"+coins[i]+" .7d").css("color", green);
       }
       if (day_trend[0] === "-") {
-        $("#"+coins[i]+" .24h").css("color", "red");
+        $("#"+coins[i]+" .24h").css("color", red);
       } else {
-        $("#"+coins[i]+" .24h").css("color", "green");
+        $("#"+coins[i]+" .24h").css("color", green);
       }
       if (hour_trend[0] === "-") {
-        $("#"+coins[i]+" .1h").css("color", "red");
+        $("#"+coins[i]+" .1h").css("color", red);
       } else {
-        $("#"+coins[i]+" .1h").css("color", "green");
+        $("#"+coins[i]+" .1h").css("color", green);
       }
       if (total_profit < 0) {
-        $("#"+coins[i]+" .total_profit").css("color", "red");
+        $("#"+coins[i]+" .total_profit").css("color", red);
       } else {
-        $("#"+coins[i]+" .total_profit").css("color", "green");
+        $("#"+coins[i]+" .total_profit").css("color", green);
       }
     }
 
@@ -94,8 +96,12 @@ $(window).on('load', function() {
 $("#night_mode").change(function() {
   if (this.checked) {
     night_mode = true;
+    green = "#00C000";
+    red = "#FF0000";
   } else {
     night_mode = false;
+    green = "green";
+    red = "red";
   }
   $("body,th,td,tr").toggleClass("night");
 });
