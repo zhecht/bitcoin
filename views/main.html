@@ -14,6 +14,7 @@
     <th>Bought @ (ETH)</th>
     <th>USD</th>
     <th>Bought @ (USD)</th>
+    <th>Sold @ (USD)</th>
     <th>Profit</th>
   </tr>
   {% for row in coin_rows %}
@@ -29,6 +30,7 @@
     <td class="bought">$0</td>
     <td class="usd_profit">$0</td>
     <td class="usd_bought">$0</td>
+    <td class="usd_sold">$0</td>
     <td class="total_profit">$0</td>
   </tr>
   
@@ -38,6 +40,7 @@
     <td colspan="9"></td>
     <td id="my_total">$0</td>
     <td id="my_bought">$0</td>
+    <td id="my_sold">$0</td>
     <td id="my_profit">$0</td>
   </tr>
 </table>
@@ -45,6 +48,7 @@
   var coins = [];
   var owned = {};
   var bought = {};
+  var sold = {};
   var night_mode = false;
 </script>
 {% for coin in coin_rows %}
@@ -52,6 +56,7 @@
   coins.push("{{coin.id}}");
   owned["{{coin.id}}"] = {{coin.amt}};
   bought["{{coin.id}}"] = {{coin.bought}}.toFixed(8);
+  sold["{{coin.id}}"] = {{coin.sold}}.toFixed(8);
 </script>
 {% endfor %}
 <script src="/static/js/main.js"></script>

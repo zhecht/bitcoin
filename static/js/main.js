@@ -5,7 +5,7 @@ var red = "red";
 function timeout() {
 
   $.get(url+"price", function(data) {
-    var overall_profit = 0, overall = 0, overall_bought = 0;
+    var overall_profit = 0, overall = 0, overall_bought = 0, overall_sold = 0;
 
     //console.log(data);
     for (var i = 0; i < coins.length; ++i) {
@@ -25,12 +25,15 @@ function timeout() {
       var curr_total = (price * owned[coins[i]]).toFixed(2);
       //var bought_total = (bought[coins[i]] * owned[coins[i]]).toFixed(2);
       var bought_total = bought[coins[i]];
-      var total_profit = ((eth_price - bought_total) * curr_eth_price).toFixed(2);
+      var sold_total = sold[coins[i]];
+      var total_profit = ((eth_price - (bought_total - sold_total)) * curr_eth_price).toFixed(2);
       var usd_profit = (eth_price*curr_eth_price).toFixed(2);
       var usd_bought = (bought_total*curr_eth_price).toFixed(2);
+      var usd_sold = (sold_total*curr_eth_price).toFixed(2);
       
       overall_profit += parseFloat(total_profit);
       overall_bought += parseFloat((bought_total*curr_eth_price).toFixed(2));
+      overall_sold += parseFloat((sold_total*curr_eth_price).toFixed(2));
       overall += parseFloat((eth_price*curr_eth_price).toFixed(2));
 
       $("#"+coins[i]+" .price").text("$"+price);
@@ -45,6 +48,7 @@ function timeout() {
       $("#"+coins[i]+" .total_profit").text("$"+total_profit);
       $("#"+coins[i]+" .usd_profit").text("$"+usd_profit);
       $("#"+coins[i]+" .usd_bought").text("$"+usd_bought);
+      $("#"+coins[i]+" .usd_sold").text("$"+usd_sold);
 
       if (week_trend[0] === "-") {
         $("#"+coins[i]+" .7d").css("color", red);
@@ -70,6 +74,7 @@ function timeout() {
 
     $("#my_total").text(overall.toFixed(2));
     $("#my_bought").text(overall_bought.toFixed(2));
+    $("#my_sold").text(overall_sold.toFixed(2));
     $("#my_profit").text("$"+overall_profit.toFixed(2));
     if (overall_profit < 0) {
       $("#my_profit").css("color", red);

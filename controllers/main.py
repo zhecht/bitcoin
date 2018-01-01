@@ -106,12 +106,16 @@ def get_rows(who):
     split_line = content[i].split(" ")
     btc_price = float(split_line[2])
     eth_price = float(split_line[3])
+    btc_sold_price = float(split_line[4])
+    eth_sold_price = float(split_line[5])
     eth_in_btc = eth_price * eth_btc
     btc_in_eth = btc_price * btc_eth
+    btc_sold_in_eth = btc_sold_price * btc_eth
 
     btc_price += eth_in_btc
     eth_price += btc_in_eth
-    coin_rows.append({"id": split_line[0], "amt": float(split_line[1]), "bought": eth_price})
+    eth_sold_price += btc_sold_in_eth
+    coin_rows.append({"id": split_line[0], "amt": float(split_line[1]), "bought": eth_price, "sold": eth_sold_price})
   return coin_rows
 
 def get_price_dict(price_list):
