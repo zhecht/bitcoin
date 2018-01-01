@@ -46,7 +46,8 @@ full_names = {
   "ark": "ark",
   "xrb": "raiblocks",
   "dbc": "deepbrain-chain",
-  "bnty": "bounty0x"
+  "bnty": "bounty0x",
+  "etn": "electroneum"
 }
 
 pre_url = "/home/zhecht/bitcoin/"
@@ -178,7 +179,7 @@ def price_route(name):
     elif coin == "vet":
       price = float(prices["VENBTC"])
       eth_price = float(prices["VENETH"])
-    elif coin == "dbc" or coin == "bnty" or coin == "xrb":
+    elif coin == "dbc" or coin == "bnty" or coin == "xrb" or coin == "etn":
       price = float(all_tds[4].find("a").get("data-btc"))
       eth_price = btc_eth * price
     else:
