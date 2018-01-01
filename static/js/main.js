@@ -72,9 +72,9 @@ function timeout() {
     $("#my_bought").text(overall_bought.toFixed(2));
     $("#my_profit").text("$"+overall_profit.toFixed(2));
     if (overall_profit < 0) {
-      $("#my_profit").css("color", "red");
+      $("#my_profit").css("color", red);
     } else {
-      $("#my_profit").css("color", "green");
+      $("#my_profit").css("color", green);
     }
   });
 }
