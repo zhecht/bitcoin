@@ -25,6 +25,7 @@ full_names = {
   "neo": "neo",
   "icx": "icon",
   "iota": "iota",
+  "cvc": "civic",
   "vet": "vechain",
   "qtum": "qtum",
   "eng": "enigma-project",
@@ -183,7 +184,7 @@ def price_route(name):
     elif coin == "vet":
       price = float(prices["VENBTC"])
       eth_price = float(prices["VENETH"])
-    elif coin == "dbc" or coin == "bnty" or coin == "xrb" or coin == "etn":
+    elif coin == "dbc" or coin == "bnty" or coin == "xrb" or coin == "etn" or coin == "cvc":
       price = float(all_tds[4].find("a").get("data-btc"))
       eth_price = btc_eth * price
     else:
