@@ -19,7 +19,7 @@
   </tr>
   {% for row in coin_rows %}
   <tr id="{{row.id}}">
-    <td class="title">{{row.id}}</td>
+    <td class="title"><a href="https://coinmarketcap.com/currencies/{{row.full}}/">{{row.id}}</a></td>
     <td class="price">$0</td>
     <td class="cap">$0</td>
     <td class="1h">0%</td>
